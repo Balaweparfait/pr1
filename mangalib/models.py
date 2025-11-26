@@ -15,8 +15,8 @@ class users (models.Model):
     
 
     class Meta:
-        verbose_name="utlisateur"
-        verbose_name_plural="utlisateurs"
+        verbose_name="utilisateur"
+        verbose_name_plural="utilisateurs"
 
 
 class produits(models.Model):
