@@ -1,0 +1,288 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slug's Style</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="structure">
+        <header>
+            <div class="burger" onclick="toggleMenu()">
+                &#9776;
+            </div>
+            <nav id="menu">
+                <div class="content">
+                    <div class="element"><img src="{%static 'images/logo1.png'%}" alt=""></div>
+                    <div class="element"><a href="#">Acceuil</a></div>
+                    <div class="element"><a href="#service">Services</a></div>
+                    <div class="element"><a href="#boutique">Boutiques</a></div>
+                    <div class="element"><a href="#aboutus">A Propos de Nous</a></div>
+                    <div class="element"><a href="#contactus">Nous Contacter</a></div>
+                    <div class="contentPan">
+                        <div class="sectPan"><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+                        <div class="sectPan">
+                            {% if user.is_authenticated %}
+                            {{ user.username }} | <a href="{{ url 'authUser: logout'}}">Deconnexion</a>
+                            {% else %}
+                            <a href="{{ url 'authUser: login'}}">Connexion</a>
+                            <a href="{{ url 'authUser: register'}}">Inscription</a>
+                            <!-- <i class="fa-solid fa-user"></i>  -->
+                            {% endif%}
+                        
+                       </div>
+                        <div class="sectPan"><a href="#"><i class="fa-solid fa-basket-shopping"></i></a></div>
+    
+                    </div>
+                </div>
+            </nav>
+            <div class="centralbghe">
+                <div class="butounapropos">
+                    <h1>Slug's Style</h1>
+                    <div class="typewriter">
+                        <span id="text"></span>
+                    </div><br><br>
+                    <div class="detailapropos">
+                        <div class="title">  Appelez le +237 695.057.929/ +237 691.148.885</div>
+                        <div class="descript">Disponibe de 6h à 20h  7/7</div>
+                    </div>
+                    <button>En savoir plus</button><br><br>
+                </div>
+            </div>
+        </header>
+        <article>
+            <h2 id="service">Pourquoi nous faire Confiance</h2>
+            <div class="valorisation">
+                <div class="valelmt">
+                    <h3>100+</h3>
+                    <p>Clients Satisfaits</p>
+                </div>
+                <div class="valelmt">
+                    <h3>50+</h3>
+                    <p>Proffessionnels Qualifiés</p>
+                </div>
+                <div class="valelmt">
+                    <h3>10+</h3>
+                    <p>Années d'Expérience</p>
+                </div>
+                <div class="valelmt">
+                    <h3>200+</h3>
+                    <p>Projets Réalisés</p>
+                </div>
+              </div>
+
+            <h2 id="service">Nos services</h2>
+            <div class="service">
+                {% for services in services%}
+                <div class="servelmt">
+                    <img src="{% static 'images/1.jpeg'%}" alt="">
+                    <div class="servDetails">
+                        <p>{{ services.title_service }}</p>
+                        <p>{{ services.prix_service }}</p>
+                        <p>{{ services.descript_service }}</p>
+                        <button class="">Reserver</button>
+                    </div>
+               </div>
+               {% endfor %}
+               <!-- <div class="servelmt">
+                    <img src="{% static 'images/1.jpeg'%}" alt="">
+                    <div class="servDetails">
+                        <p>{{ services.title_service }}</p>
+                        <ul>
+                            <li>{{ services.prix_service }}</li>
+                            <li>{{ services.descript_service }}</li>
+                        </ul>
+                        <button class="">Reserver</button>
+                    </div>
+               </div> -->
+            </div>
+ 
+           
+            <h2 id="boutique">Faites vos achats sur place</h2>
+            <div class="boutique-container">
+                <div class="boutique-list">
+                    <div class="boutique-cart">
+                        {% for produits in produits %}
+                        <div class="el">
+                            <div class="affiche"><img src="{%static 'images/make up.jpeg'%}" alt=""></div>
+                            <div class="descript">
+                                <div class="titre">{{ produits.title_product }}</div>
+                                <div class="prix">{{ produits.prix }}</div>
+                                <div class="des">{{ produits.descript_product }}</div>
+                                <div class="consulter"><button>CONSULTER</button></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>  
+                </div>
+
+            </div>
+            <h2 id="contactus"> Nous contacter</h2>
+            <div class="contact_Us">
+                <div class="contactform">
+                    <form action="" method="post">
+                        <div class="pseudo">
+                            <label for="pseudo">pseudo</label><br>
+                            <input type="text" name="pseudo" id="pseudo" placeholder="Entrez votre pseudo">
+                        </div>
+                        <div class="pseudo">
+                            <label for="mail">mail</label><br>
+                            <input type="email" name="mail" id="mail" placeholder="exemple@gmail.com">
+                        </div>
+                        <div class="pseudo">
+                            
+                            <textarea name="content" id="content" placeholder="le contenu de votre demande"></textarea>
+                        </div>
+                        <div class="btnEnvoyer">
+                            <button type="submit">Envoyer</button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+              
+            <!-- Bouton de chatbot -->
+            <div class="chatbot-container">
+                <button class="chatbot-button">Chatbot</button>
+                <div class="chatbot-content">
+                    <p>Bonjour ! Comment puis-je vous aider ?</p>
+                    <textarea placeholder="Écrivez votre message ici..."></textarea>
+                    <button class="send-button">Envoyer</button>
+                </div>
+            </div>              
+              <div class="pourquoiNous">
+                    <h2>Pourquoi nous choisir?</h2>
+                    <div class="pourquoielmt">
+                        <img src="images/quality.png" alt="">
+                        <h3>Qualité Supérieure</h3>
+                        <p>Nous utilisons des produits de haute qualité pour garantir des résultats exceptionnels à chaque service.</p>
+                    </div>
+                    <div class="pourquoielmt">
+                        <img src="images/professionalism.png" alt="">
+                        <h3>Professionnalisme</h3>
+                        <p>Notre équipe est composée de professionnels expérimentés et passionnés par leur métier.</p>
+                    </div>
+                    <div class="pourquoielmt">
+                        <img src="images/customer-service.png" alt="">
+                        <h3>Service Client Exceptionnel</h3>
+                        <p>Nous nous engageons à offrir une expérience client inégalée, en écoutant vos besoins et en y répondant avec soin.</p>
+                    </div>
+                    <div class="pourquoielmt">
+                        <img src="images/affordability.png" alt="">
+                        <h3>Tarifs Abordables</h3>
+                        <p>Nous proposons des services de qualité à des prix compétitifs pour que chacun puisse en profiter.</p>
+                    </div>
+              </div>
+              <section class="testimonials" aria-label="Témoignages">
+                <div class="col left" aria-hidden="false">
+                  <div>
+                    <div class="quote-wrap" id="leftQuotes" data-interval="4000" tabindex="0">
+                      <!-- chaque .quote contient le texte et l'auteur -->
+                      <div class="quote active" role="group" aria-roledescription="témoignage" aria-label="Témoignage 1">
+                        <h3>Professionnalisme</h3>
+                        <p>Notre équipe est composée de professionnels expérimentés et passionnés par leur métier.</p>
+                      </div>
+              
+                      <div class="quote" role="group" aria-roledescription="témoignage" aria-label="Témoignage 2">
+                        <p>« Excellent service — très satisfaite du résultat et du professionnalisme. »</p>
+                        <div class="author">— Linda</div>
+                      </div>
+              
+                      <div class="quote" role="group" aria-roledescription="témoignage" aria-label="Témoignage 3">
+                        <p>« Réponse rapide et service soigné. Je recommande vivement. »</p>
+                        <div class="author">— Rita Viaud</div>
+                      </div>
+                    </div>
+              
+                    <div class="dots" aria-hidden="false" id="leftDots"></div>
+                  </div>
+                </div>
+              
+                <div class="center" aria-hidden="true">
+                  <!-- Ici tu peux mettre une image SVG/ornement comme dans ta maquette -->
+                  <svg width="220" height="220" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g fill="none" stroke="#bfbfbf" stroke-width="1.2">
+                      <path d="M30 140c8-30 40-40 60-20s48 10 60-12" />
+                      <path d="M120 30c-10 12-8 30 8 38s28 6 36 0" />
+                      <path d="M60 40c6 8 20 10 26 4s6-18 0-24" />
+                    </g>
+                  </svg>
+                </div>
+              
+                <div class="col right">
+                  <div>
+                    <div class="quote-wrap" id="rightQuotes" data-interval="5000" tabindex="0">
+                      <div class="quote active" role="group" aria-roledescription="témoignage" aria-label="Témoignage A">
+                        <p>« Témoignage. Cliquez pour le modifier et ajouter un texte qui met en valeur vos services. »</p>
+                        <div class="author">— Rita Viaud</div>
+                      </div>
+              
+                      <div class="quote" role="group" aria-roledescription="témoignage" aria-label="Témoignage B">
+                        <p>« Très bon accueil, délai respecté et qualité top. »</p>
+                        <div class="author">— Sophie</div>
+                      </div>
+              
+                      <div class="quote" role="group" aria-roledescription="témoignage" aria-label="Témoignage C">
+                        <p>« Une expérience agréable du début à la fin. »</p>
+                        <div class="author">— Paul</div>
+                      </div>
+                    </div>
+              
+                    <div class="dots" aria-hidden="false" id="rightDots"></div>
+                  </div>
+                </div>
+              </section><br><br><br>
+        </article>
+        <footer>
+            <div class="elfooter">
+                <h4>Acces rapides</h4>
+                <ul> 
+                    <li><a href="#"><i class="fa-solid fa-house"></i>  Acceuil</a></li>
+                    <li><a href="#"><i class="fa-brands fa-servicestack"></i> Nos Services</a></li>
+                    <li><a href="#"><i class="fa-brands fa-product-hunt"></i> Nos Produits</a></li>
+                    <li><a href="#"><i class="fa-brands fa-sourcetree"></i> A Propos de nous</a></li>
+                    <li><a href="#"><i class="fa-solid fa-address-card"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="elfooter">
+                <h4>Coordonnées</h4>
+                <ul>
+                    <li>une laborum un peu de chang n'as rien ipactant </li>
+                    <li>une liste de nos references</li>
+                    <li>une liste de nos references</li>
+                </ul>
+            </div>
+            <div class="elfooter">
+                <h4>Nos Références</h4>
+                <ul>
+                    <li>une liste de nos references</li>
+                    <li>une liste de nos references</li>
+                    <li>une liste de nos references</li>
+                </ul>
+            </div>
+            <div class="elfooter">
+                <h4>Suivez-nous</h4>
+                <div class="socialmedia">
+                    
+                    <div class="newsletter">
+                        <input type="email" placeholder="Entrez votre email">
+                        <button>S'abonner</button>
+                    </div>
+                    <br>
+                    <h4>Newsletter</h4>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="{%static 'js/script.js' %}"></script>
+</body>
+</html>
