@@ -28,10 +28,10 @@
                         <div class="sectPan"><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></div>
                         <div class="sectPan">
                             {% if user.is_authenticated %}
-                            {{ user.username }} | <a href="{{ url 'authUser: logout'}}">Deconnexion</a>
+                            {{ user.username }} | <a href="{% url 'authUser:logout' %}">Deconnexion</a>
                             {% else %}
-                            <a href="{{ url 'authUser: login'}}">Connexion</a>
-                            <a href="{{ url 'authUser: register'}}">Inscription</a>
+                            <a href="{% url 'authUser:login' %}">Connexion</a>
+                            <a href="{% url 'authUser:register' %}">Inscription</a>
                             <!-- <i class="fa-solid fa-user"></i>  -->
                             {% endif%}
                         
